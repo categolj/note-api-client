@@ -6,7 +6,7 @@
 
 	<groupId>am.ik.note</groupId>
 	<artifactId>note-api-client</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>note-api-client</name>
 	<description>A Java library template</description>
 
