@@ -4,10 +4,10 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>am.ik.template</groupId>
-	<artifactId>java-lib</artifactId>
+	<groupId>am.ik.note</groupId>
+	<artifactId>note-api-client</artifactId>
 	<version>0.1.1-SNAPSHOT</version>
-	<name>java-lib</name>
+	<name>note-api-client</name>
 	<description>A Java library template</description>
 
 	<properties>
@@ -25,12 +25,12 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>https://github.com/making/java-lib</url>
-		<connection>scm:git:git@github.com:making/java-lib.git</connection>
-		<developerConnection>scm:git:git@github.com:making/java-lib.git
+		<url>https://github.com/categolj/note-api-client</url>
+		<connection>scm:git:git@github.com:making/note-api-client.git</connection>
+		<developerConnection>scm:git:git@github.com:making/note-api-client.git
 		</developerConnection>
 	</scm>
-	<url>https://github.com/making/java-lib</url>
+	<url>https://github.com/categolj/note-api-client</url>
 
 	<developers>
 		<developer>
@@ -42,8 +42,19 @@
 	</developers>
 	<dependencies>
 		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -64,6 +75,34 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.5.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>https://note-api-note.apps.ik.am/v3/api-docs</inputSpec>
+							<generatorName>java</generatorName>
+							<library>resttemplate</library>
+							<apiPackage>am.ik.note.api</apiPackage>
+							<modelPackage>am.ik.note.model</modelPackage>
+							<invokerPackage>am.ik.note.invoker</invokerPackage>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<configOptions>
+								<annotationLibrary>none</annotationLibrary>
+								<sourceFolder>src/main/java</sourceFolder>
+								<dateLibrary>java8</dateLibrary>
+								<useJakartaEe>true</useJakartaEe>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
